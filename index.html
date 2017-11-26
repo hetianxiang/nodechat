@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>socket.io</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container" style="margin-top:10px">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="text-center">欢迎光临聊天室</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+
+                    </ul>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary">发言</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+//引入这个脚本后，会在window下挂一个io的属性，通过它可以连接服务器
+  let socket = io();
+  //在连接成功之后就会执行对应的函数
+  socket.on('connect',function(){
+     console.log('客户端连接成功');
+     socket.send('你好');
+  });
+  //监听服务器发过来的消息
+  socket.on('message',function(message){
+    console.log(message);
+  });
+</script>
+</body>
+</html>
